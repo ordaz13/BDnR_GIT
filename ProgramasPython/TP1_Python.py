@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue Aug 21 16:54:46 2018
-
 @author: usuario
 """
-
+import random
 #1.a Funcion para agregar ceros a un arreglo
 def desplazaArreglo(a,k):
     aux = []
@@ -42,6 +41,12 @@ def promedioPond(calif):
         if calif[i] >= 6:
             prom = prom + calif[i]*pond[i]
     return round(prom)
+#2. Otra forma de hacer la función pasada es
+def promedioPond2(calif):
+    porcentajes = [.1,.2,.23,.3,.17]
+    prom = [c*p for c,p in zip(calif, porcentajes)]
+    result = round(sum(prom),1)
+    return result
 #3. Funcion que obtiene los pares de una lista
 def tuplaPares(a):
     resp = []
@@ -61,26 +66,73 @@ def superposicion(a,b):
         else:
             break
     return bandera
-                        
+ #5. Funcion que cuenta las repeticiones en una cadena
+def repeticiones(cad):
+    dic = {} 
+    listaCad = cad.split()
+    for j in listaCad:
+        if j in dic:
+            dic[j] = dic[j] + 1
+        else:
+            dic[j] = 1
+    return dic
+#6. Función que calcula las veces que una suma de dados dio lo mismo
+def sumaDados(n):
+    dic = {}
+    for i in range(n):
+        sum = random.randint(1,6) + random.randint(1,6)
+        if sum in dic:
+          dic[sum] = dic[sum] + 1
+        else:
+          dic[sum] = 1
+    return dic
+#6.1 Función que muestra los pares del lanzamiento
+def paresDados(n):
+    dic = {}
+    for i in range(n):
+        par1 = random.randint(1,6)
+        par2 = random.randint(1,6)
+        lanzamiento = par1, par2
+        lanzamientoI = par2, par1
+        if lanzamiento in dic or lanzamientoI in dic:
+            if lanzamiento in dic:
+                dic[lanzamiento] = dic[lanzamiento] + 1
+            else:
+                dic[lanzamientoI] = dic[lanzamientoI] + 1
+        else:
+            dic[lanzamiento] = 1
+    return dic
 
-#Prueba de la funcion desplazaArreglo
-a = [1,2,3,4,5,6]
-k = -3
-resp = desplazaArreglo(a,k)
-#Prueba de la funcion del promedio ponderado
-import random
-calif = []
-for i in range(5):
-    calif.append(random.randint(6,10))
-prom = promedioPond(calif)
-#Prueba suma de matrices
-x = [[1,2,3], [4,5,6], [7 ,8,9]]
-y = [[9,8,7], [6,5,4], [3,2,1]]
-resp = sumaMatrices(x,y)
-#Prueba de la funcion tuplaPares
-b = ['a','b','c','d']
-resp = tuplaPares(b)
-#Prueba superposicion
-m = ['a','b','c','d']
-n = [1,2,3,4,5,6]
-resp = superposicion(m,n)
+##Prueba de la funcion desplazaArreglo
+#a = [1,2,3,4,5,6]
+#k = -3
+#resp = desplazaArreglo(a,k)
+##Prueba de la funcion del promedio ponderado
+#calif = []
+#for i in range(5):
+#    calif.append(random.randint(6,10))
+#prom = promedioPond(calif)
+#prom2 = promedioPond2(calif)
+##Prueba suma de matrices
+#x = [[1,2,3], [4,5,6], [7 ,8,9]]
+#y = [[9,8,7], [6,5,4], [3,2,1]]
+#resp = sumaMatrices(x,y)
+##Prueba de la funcion tuplaPares
+#b = ['a','b','c','d']
+#resp = tuplaPares(b)
+##Prueba superposicion
+#m = ['a','b','c','d']
+#n = [1,2,3,4,5,6]
+#resp = superposicion(m,n)
+##Prueba repeticiones
+#a = 'que día tan lluvioso que hace hoy'
+#resul = repeticiones(a)
+#print(resul)
+##Prueba repeticiones
+#n = 10
+#resul = sumaDados(n)
+#print(resul)
+#Prueba pares
+n = 10
+resul = paresDados(n)
+print(resul)
