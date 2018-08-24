@@ -25,7 +25,7 @@ def desplazaArreglo(a,k):
     return a
 #1.b Funcion de la suma de matrices
 def sumaMatrices(a,b):
-    if len(a) == len(b):
+    if len(a) == len(b) and len(a[0]) == len(b[0]):
         c = [[0]*len(a) for i in range(len(a))]
         for i in range(len(a)):
            for j in range(len(a[0])):
