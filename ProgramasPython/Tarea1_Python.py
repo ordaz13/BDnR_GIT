@@ -18,26 +18,56 @@ def multiplicacionMatrices(a,b):
         return "No es posible hacer la multiplicacion"
     
 #2.
-def opPolinomios():
-    arch = open('Polinomios.txt','r')
+def lec_convDeArchivo(archivo):
+    arch = open(archivo,'r')
     cad = arch.read()
     listaCad = cad.split('\n')
     arch.close()
     pol1 = listaCad[0]; pol1 = pol1.split(' '); pol1 = pol1[0:-2]
+    pol1 = list(map(float,pol1))
     coef1 = pol1[0:len(pol1):2]; exp1 = pol1[1:len(pol1):2]
+    exp1 = list(map(int,exp1))
     pol2 = listaCad[1]; pol2 = pol2.split(' '); pol2 = pol2[0:-2]
+    pol2 = list(map(float,pol2))
     coef2 = pol2[0:len(pol2):2]; exp2 = pol2[1:len(pol2):2]
+    exp2 = list(map(int,exp2))
+    return coef1, coef2, exp1, exp2
+
+def imprimePolinomio(lista):
+    listaS = []
+    for i in range(len(lista)-1,0,-1):
+        if lista[i] != 0:
+            if lista[i] > 0:
+                cad = '+'+str("%.1f" %lista[i])+'X^'+str(i)
+                listaS.append(cad)
+            else:
+                cad = str("%.1f" %lista[i])+'X^'+str(i)
+                listaS.append(cad)
+    cadF = ''.join(str(e) for e in listaS)
+    return cadF
+    
+
+def opPolinomios():
+    coef1,coef2,exp1,exp2 = lec_convDeArchivo('Polinomios.txt')
     #suma
     sumP1 = [0 for i in range(16)]
     for i in range(len(coef1)):
-        sumP1[int(exp1[i])] = float(coef1[i])
+        sumP1[exp1[i]] = coef1[i]
     sumP2 = [0 for i in range(16)]
     for j in range(len(coef2)):
-        sumP2[int(exp2[j])] = float(coef2[j])
+        sumP2[exp2[j]] = coef2[j]
     suma = [p1+p2 for p1,p2 in zip(sumP1, sumP2)]
     #multiplicacion
-    #FALTA TERMINAR ESTA PARTE
-    return suma
+    resCoef = [] 
+    resExp = []
+    for i in range(len(coef1)):
+        for j in range(len(coef2)):
+            resCoef.append(coef1[i]*coef2[j])
+            resExp.append(exp1[i]+exp2[j])
+    mult = [0 for i in range(max(resExp)+1)]
+    for k in range(len(resCoef)):
+        mult[resExp[k]] = mult[resExp[k]] + resCoef[k]
+    return suma, mult
     
 #3. 
 def subCadena(stri,cad):
@@ -72,20 +102,11 @@ def repeticionesArchivo():
 #print(multiplicacionMatrices(A,B))
     
 #2. Prueba
-suma = opPolinomios()
+suma, mult = opPolinomios()
 #Suma de polinomios
-listaS = []
-for i in range(len(suma)-1,0,-1):
-    if suma[i] != 0:
-        if suma[i] > 0:
-            cad = '+'+str(suma[i])+'X^'+str(i)
-            listaS.append(cad)
-        else:
-            cad = str(suma[i])+'X^'+str(i)
-            listaS.append(cad)
-print(''.join(str(e) for e in listaS))
+print(imprimePolinomio(suma))
 #Multiplicacion de polinomios
-#FALTA TERMINAR ESTA PARTE
+print(imprimePolinomio(mult))
 
 ##3. Prueba
 #str = 'bobazcbobobegbobghbobobaklbobob'            
