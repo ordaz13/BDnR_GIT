@@ -45,7 +45,6 @@ def imprimePolinomio(lista):
                 listaS.append(cad)
     cadF = ''.join(str(e) for e in listaS)
     return cadF
-    
 
 def opPolinomios():
     coef1,coef2,exp1,exp2 = lec_convDeArchivo('Polinomios.txt')
@@ -68,7 +67,7 @@ def opPolinomios():
     for k in range(len(resCoef)):
         mult[resExp[k]] = mult[resExp[k]] + resCoef[k]
     return suma, mult
-    
+
 #3. 
 def subCadena(stri,cad):
     pos = []
@@ -96,22 +95,41 @@ def repeticionesArchivo():
             dic[j] = 1
     return dic
 
-##1. Prueba
-#A = [[1,2],[3,4]]
-#B = [[1,2],[3,4]]
-#print(multiplicacionMatrices(A,B))
-    
-#2. Prueba
-suma, mult = opPolinomios()
-#Suma de polinomios
-print(imprimePolinomio(suma))
-#Multiplicacion de polinomios
-print(imprimePolinomio(mult))
+
+#1. Prueba
+#Lectura de archivo
+arch = open('Matrices.txt','r')
+cad = arch.read()
+listaCad = cad.split('\n')
+c1 = listaCad[0].split(';'); c1 = c1[0:len(c1)-1]
+c2 = listaCad[1].split(';'); c2 = c2[0:len(c2)-1] 
+mat1 = []; mat2 = []
+for i in range(len(c1)):
+    mat1.append(c1[i].split(' '));
+for j in range(len(c2)):
+    mat2.append(c2[j].split(' '));
+for k in range(len(mat1)):
+    mat1[k] = list(map(int,mat1[k]))
+for l in range(len(mat2)):
+    mat2[l] = list(map(int,mat2[l]))
+print(multiplicacionMatrices(mat1,mat2))
+#Matrices dadas
+A = [[1,2],[3,4]]
+B = [[1,2],[3,4]]
+#Multiplicacion de matrices
+print(multiplicacionMatrices(A,B))
+
+##2. Prueba
+#suma, mult = opPolinomios()
+##Suma de polinomios
+#print(imprimePolinomio(suma))
+##Multiplicacion de polinomios
+#print(imprimePolinomio(mult))
 
 ##3. Prueba
-#str = 'bobazcbobobegbobghbobobaklbobob'            
+#palabra = 'bobazcbobobegbobghbobobaklbobob'            
 #cad = 'bob'
-#num = subCadena(str, cad)
+#num = subCadena(palabra, cad)
 #print('El número de veces que ',cad,' aparece es: ',num)
     
 ##4. Prueba
