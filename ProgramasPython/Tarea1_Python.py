@@ -95,29 +95,42 @@ def repeticionesArchivo():
             dic[j] = 1
     return dic
 
+#5.
+def numElemTot(dic):
+    lista = list(dic.values())
+    suma = 0
+    for elem in lista:
+        if ((type(elem)==list) or (type(elem)==tuple) or (type(elem)==dict) or (type(elem)==set)):
+            suma = suma + len(elem)
+        else:
+            suma = suma + 1
+    return suma
 
-#1. Prueba
-#Lectura de archivo
-arch = open('Matrices.txt','r')
-cad = arch.read()
-listaCad = cad.split('\n')
-c1 = listaCad[0].split(';'); c1 = c1[0:len(c1)-1]
-c2 = listaCad[1].split(';'); c2 = c2[0:len(c2)-1] 
-mat1 = []; mat2 = []
-for i in range(len(c1)):
-    mat1.append(c1[i].split(' '));
-for j in range(len(c2)):
-    mat2.append(c2[j].split(' '));
-for k in range(len(mat1)):
-    mat1[k] = list(map(int,mat1[k]))
-for l in range(len(mat2)):
-    mat2[l] = list(map(int,mat2[l]))
-print(multiplicacionMatrices(mat1,mat2))
-#Matrices dadas
-A = [[1,2],[3,4]]
-B = [[1,2],[3,4]]
-#Multiplicacion de matrices
-print(multiplicacionMatrices(A,B))
+#6.
+
+
+##1. Prueba
+##Lectura de archivo
+#arch = open('Matrices.txt','r')
+#cad = arch.read()
+#listaCad = cad.split('\n')
+#c1 = listaCad[0].split(';'); c1 = c1[0:len(c1)-1]
+#c2 = listaCad[1].split(';'); c2 = c2[0:len(c2)-1] 
+#mat1 = []; mat2 = []
+#for i in range(len(c1)):
+#    mat1.append(c1[i].split(' '));
+#for j in range(len(c2)):
+#    mat2.append(c2[j].split(' '));
+#for k in range(len(mat1)):
+#    mat1[k] = list(map(int,mat1[k]))
+#for l in range(len(mat2)):
+#    mat2[l] = list(map(int,mat2[l]))
+#print(multiplicacionMatrices(mat1,mat2))
+##Matrices dadas
+#A = [[1,2],[3,4]]
+#B = [[1,2],[3,4]]
+##Multiplicacion de matrices
+#print(multiplicacionMatrices(A,B))
 
 ##2. Prueba
 #suma, mult = opPolinomios()
@@ -140,3 +153,12 @@ print(multiplicacionMatrices(A,B))
 #print('Palabra','\t','Repeticiones')
 #for i in range(len(palabras)):
 #    print(palabras[i],':',repeticiones[i])
+    
+##5. Prueba
+#dic = {1:1, 2:6.6, 3:'x', 4:'matenme', 5:['a','b','c'], 6:['odio','vivir'], 
+#       7:('no','valgo','la','pena'), 8:{'a':1,'b':2,'c':3}}
+#cuentaTot = numElemTot(dic)
+#print('El total de elementos en la lista es: ',cuentaTot)
+    
+#6. Prueba
+
