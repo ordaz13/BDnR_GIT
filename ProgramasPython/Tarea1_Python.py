@@ -107,58 +107,76 @@ def numElemTot(dic):
     return suma
 
 #6.
+def escribeClave(archivo):
+    cad1 = input('Escribe la primera cadena: ')
+    cad2 = input('Escribe la segunda cadena: ')
+    while(len(cad1)>7 or len(cad2)>7 or len(cad1)>len(cad2)):
+        if len(cad1)>7 or len(cad2)>7:
+            print('Las cadenas deben ser menor o igual a siete caracteres')
+        else:
+            print('La primera cadena tiene que ser menor que la segunda')
+    flec = open(archivo,'r')
+    arch = flec.read()
+    flec.close()
+    palabras = arch.split()
+    fesc = open('Respuestas.txt','w')
+    for p in palabras:
+        clave = p[0:7]
+        if cad1<clave and clave<cad2:
+            fesc.write(clave + '\n')
+    fesc.close()
 
 
-##1. Prueba
-##Lectura de archivo
-#arch = open('Matrices.txt','r')
-#cad = arch.read()
-#listaCad = cad.split('\n')
-#c1 = listaCad[0].split(';'); c1 = c1[0:len(c1)-1]
-#c2 = listaCad[1].split(';'); c2 = c2[0:len(c2)-1] 
-#mat1 = []; mat2 = []
-#for i in range(len(c1)):
-#    mat1.append(c1[i].split(' '));
-#for j in range(len(c2)):
-#    mat2.append(c2[j].split(' '));
-#for k in range(len(mat1)):
-#    mat1[k] = list(map(int,mat1[k]))
-#for l in range(len(mat2)):
-#    mat2[l] = list(map(int,mat2[l]))
-#print(multiplicacionMatrices(mat1,mat2))
-##Matrices dadas
-#A = [[1,2],[3,4]]
-#B = [[1,2],[3,4]]
-##Multiplicacion de matrices
-#print(multiplicacionMatrices(A,B))
+#1. Prueba
+#Lectura de archivo
+arch = open('Matrices.txt','r')
+cad = arch.read()
+listaCad = cad.split('\n')
+c1 = listaCad[0].split(';'); c1 = c1[0:len(c1)-1]
+c2 = listaCad[1].split(';'); c2 = c2[0:len(c2)-1] 
+mat1 = []; mat2 = []
+for i in range(len(c1)):
+    mat1.append(c1[i].split(' '));
+for j in range(len(c2)):
+    mat2.append(c2[j].split(' '));
+for k in range(len(mat1)):
+    mat1[k] = list(map(int,mat1[k]))
+for l in range(len(mat2)):
+    mat2[l] = list(map(int,mat2[l]))
+print(multiplicacionMatrices(mat1,mat2))
+#Matrices dadas
+A = [[1,2],[3,4]]
+B = [[1,2],[3,4]]
+#Multiplicacion de matrices
+print(multiplicacionMatrices(A,B))
 
-##2. Prueba
-#suma, mult = opPolinomios()
-##Suma de polinomios
-#print(imprimePolinomio(suma))
-##Multiplicacion de polinomios
-#print(imprimePolinomio(mult))
+#2. Prueba
+suma, mult = opPolinomios()
+#Suma de polinomios
+print(imprimePolinomio(suma))
+#Multiplicacion de polinomios
+print(imprimePolinomio(mult))
 
-##3. Prueba
-#palabra = 'bobazcbobobegbobghbobobaklbobob'            
-#cad = 'bob'
-#num = subCadena(palabra, cad)
-#print('El número de veces que ',cad,' aparece es: ',num)
+#3. Prueba
+palabra = 'bobazcbobobegbobghbobobaklbobob'            
+cad = 'bob'
+num = subCadena(palabra, cad)
+print('El número de veces que ',cad,' aparece es: ',num)
     
-##4. Prueba
-#dic = repeticionesArchivo()
-#palabras = list(dic.keys())
-#repeticiones = list(dic.values())
-#print('El total de palabras encontradas fue de: ',len(palabras))
-#print('Palabra','\t','Repeticiones')
-#for i in range(len(palabras)):
-#    print(palabras[i],':',repeticiones[i])
+#4. Prueba
+dic = repeticionesArchivo()
+palabras = list(dic.keys())
+repeticiones = list(dic.values())
+print('El total de palabras encontradas fue de: ',len(palabras))
+print('Palabra','\t','Repeticiones')
+for i in range(len(palabras)):
+    print(palabras[i],':',repeticiones[i])
     
-##5. Prueba
-#dic = {1:1, 2:6.6, 3:'x', 4:'matenme', 5:['a','b','c'], 6:['odio','vivir'], 
-#       7:('no','valgo','la','pena'), 8:{'a':1,'b':2,'c':3}}
-#cuentaTot = numElemTot(dic)
-#print('El total de elementos en la lista es: ',cuentaTot)
+#5. Prueba
+dic = {1:1, 2:6.6, 3:'x', 4:'matenme', 5:['a','b','c'], 6:['odio','vivir'], 
+       7:('no','valgo','la','pena'), 8:{'a':1,'b':2,'c':3}}
+cuentaTot = numElemTot(dic)
+print('El total de elementos en la lista es: ',cuentaTot)
     
 #6. Prueba
-
+escribeClave('Palabras.txt')
