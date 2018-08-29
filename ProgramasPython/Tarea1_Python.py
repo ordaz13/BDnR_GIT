@@ -118,11 +118,11 @@ def escribeClave(archivo):
     flec = open(archivo,'r')
     arch = flec.read()
     flec.close()
-    palabras = arch.split()
+    palabras = arch.split('\n')
     fesc = open('Respuestas.txt','w')
     for p in palabras:
         clave = p[0:7]
-        if cad1<clave and clave<cad2:
+        if cad1=<clave and clave=<cad2:
             fesc.write(clave + '\n')
     fesc.close()
 
