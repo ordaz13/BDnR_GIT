@@ -123,7 +123,7 @@ def escribeClave(archivo):
     for p in palabras:
         clave = p[0:7]
         if cad1=<clave and clave=<cad2:
-            fesc.write(clave + '\n')
+            fesc.write(p + '\n')
     fesc.close()
 
 
