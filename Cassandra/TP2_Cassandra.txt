@@ -1,0 +1,143 @@
+/*
+* TP2. Bases de datos NoSQL: Cassandra
+* Paola Mejía
+* Amanda Velasco
+* José Sánchez
+* Octavio Ordaz
+*/
+
+//3.
+//Creacion del keyspace
+create keyspace bdprogramas with replication = { 'class' : 'SimpleStrategy','replication_factor' : 1};
+//Creacion de las tablas
+use bdprogramas;
+//Tabla de clientes
+CREATE TABLE clientes(
+    nom         VARCHAR,
+    prod        VARCHAR,
+    tipo        VARCHAR,
+    PRIMARY KEY(nom, prod)
+);
+//Tabla de banco
+CREATE TABLE banco(
+    cte         VARCHAR,
+    fecha       TIMESTAMP,
+    medio       VARCHAR,
+    mov         DOUBLE,
+    prod        VARCHAR,
+    PRIMARY KEY(cte, fecha))
+    WITH CLUSTERING ORDER BY(fecha DESC);
+
+//Inserts
+//cliente
+INSERT INTO clientes(nom, prod, tipo) VALUES('Dian','inversión','persona');
+INSERT INTO clientes(nom, prod, tipo) VALUES('Dian','cheques','persona');
+INSERT INTO clientes(nom, prod, tipo) VALUES('Karyl','inversión','emp');
+INSERT INTO clientes(nom, prod, tipo) VALUES('Karyl','credito','emp');
+INSERT INTO clientes(nom, prod, tipo) VALUES('Maryrose','inversión','persona');
+INSERT INTO clientes(nom, prod, tipo) VALUES('Maryrose','credito','persona');
+INSERT INTO clientes(nom, prod, tipo) VALUES('Maryrose','cheques','persona');
+INSERT INTO clientes(nom, prod, tipo) VALUES('Myles','inversión','emp');
+//banco
+INSERT INTO banco(cte, fecha, medio, mov, prod) VALUES('Dian','2018-09-14','celular',-156,'inversión');
+INSERT INTO banco(cte, fecha, medio, mov, prod) VALUES('Dian','2018-09-14','celular',-387,'cheques');
+INSERT INTO banco(cte, fecha, medio, mov, prod) VALUES('Dian','2018-09-14','celular',-292,'cheques');
+INSERT INTO banco(cte, fecha, medio, mov, prod) VALUES('Karyl','2018-09-15','ventanilla',30,'inversión');
+INSERT INTO banco(cte, fecha, medio, mov, prod) VALUES('Karyl','2018-09-04','internet',838,'inversión');
+INSERT INTO banco(cte, fecha, medio, mov, prod) VALUES('Karyl','2018-09-11','celular',462,'credito');
+INSERT INTO banco(cte, fecha, medio, mov, prod) VALUES('Karyl','2018-09-03','celular',-886,'inversión');
+INSERT INTO banco(cte, fecha, medio, mov, prod) VALUES('Maryrose','2018-09-09','ventanilla',-569,'inversión');
+INSERT INTO banco(cte, fecha, medio, mov, prod) VALUES('Maryrose','2018-09-08','celular',468,'credito');
+INSERT INTO banco(cte, fecha, medio, mov, prod) VALUES('Maryrose','2018-09-03','celular',81,'inversión');
+INSERT INTO banco(cte, fecha, medio, mov, prod) VALUES('Maryrose','2018-09-04','ventanilla',302,'cheques');
+INSERT INTO banco(cte, fecha, medio, mov, prod) VALUES('Myles','2018-09-14','celular',958,'inversión');
+INSERT INTO banco(cte, fecha, medio, mov, prod) VALUES('Myles','2018-09-11','internet',304,'inversión');
+
+//Consultas
+//a. El tipo de productos que maneja un cliente dado.
+use bdprogramas;
+SELECT * FROM clientes WHERE nom = 'Maryrose';
+//b. La cantidad total de clientes que manejan inversiones.
+use bdprogramas;
+CREATE INDEX ON clientes(prod);
+use bdprogramas;
+SELECT COUNT(*) FROM clientes WHERE prod = 'inversión';
+//c. El nombre de los clientes que hicieron depósitos o retiros la semana pasada (día inicial: lunes).
+use bdprogramas;
+SELECT cte, fecha FROM banco WHERE fecha >= '2018-09-03' and fecha <= '2018-09-09' ALLOW FILTERING;
+//d. El nombre de los clientes, y el día, que hicieron retiros superiores a un monto dado.
+use bdprogramas;
+SELECT cte, fecha FROM banco WHERE mov >= 350 ALLOW FILTERING;
+//e. Los montos de los depósitos y retiros que se hicieron para un producto dado en un rango de fechas.
+use bdprogramas;
+SELECT mov FROM banco WHERE fecha >= '2018-09-01' and fecha <= '2018-09-15' and prod='credito' ALLOW FILTERING;
+//f. El nombre de los productos, y del medio, que tuvieron depósitos superiores a un monto específico en un día concreto.
+use bdprogramas;
+SELECT prod, medio FROM banco WHERE fecha = '2018-09-14' and mov > 50 ALLOW FILTERING;
+
+//4.
+//Creacion del keyspace
+create keyspace supermercado with replication = { 'class' : 'SimpleStrategy', 'replication_factor' : 1};
+
+//Creacion de tablas
+use supermercado;
+//Tabla de compras
+create table compra(
+    clave int,
+    sucursal int,
+    fecha text,
+    cliente text,
+    producto text,
+    cantidad int,
+    tipo text,
+    precio_unit double,
+    total double,
+    primary key(sucursal, fecha, clave))
+    with clustering order by (fecha desc);
+//Indice sobre cliente de la tabla compra
+create index on compra(cliente);
+//Tabla de clientes
+create table cliente(
+    sucursal int,
+    fecha text,
+    nombre text,
+    primary key(sucursal, fecha, nombre));
+    
+//Inserts
+//compra
+use supermercado;
+insert into compra(clave, sucursal, fecha, cliente, producto, cantidad, tipo, precio_unit, total) values(1, 101,'2018-08-01','Jose Antonio', 'frijol', 2, 'comida', 13, 26);
+insert into compra(clave, sucursal, fecha, cliente, producto, cantidad, tipo, precio_unit, total) values(2, 101,'2018-08-01','Jose Antonio', 'shampoo', 1, 'higiene', 31, 31);
+insert into compra(clave, sucursal, fecha, cliente, producto, cantidad, tipo, precio_unit, total) values(3, 101,'2018-08-10','Andres Manuel', 'frijol', 2, 'comida', 13, 26);
+insert into compra(clave, sucursal, fecha, cliente, producto, cantidad, tipo, precio_unit, total) values(4, 101,'2018-08-10','Andres Manuel', 'arroz', 2, 'comida', 15, 30);
+insert into compra(clave, sucursal, fecha, cliente, producto, cantidad, tipo, precio_unit, total) values(5, 102,'2018-07-06','Ricardo', 'paracetamol', 3, 'farmacia', 12, 36);
+insert into compra(clave, sucursal, fecha, cliente, producto, cantidad, tipo, precio_unit, total) values(6, 102,'2018-07-06','Ricardo', 'dentrifico', 4, 'higiene', 35, 140);
+insert into compra(clave, sucursal, fecha, cliente, producto, cantidad, tipo, precio_unit, total) values(7, 101,'2018-08-30','Andres Manuel', 'clonazepam', 100, 'farmacia', 80, 8000);
+insert into compra(clave, sucursal, fecha, cliente, producto, cantidad, tipo, precio_unit, total) values(8, 102,'2018-09-01','Octavio', 'clonazepam', 100, 'farmacia', 80, 8000);
+//cliente
+use supermercado;
+insert into cliente(sucursal, fecha, nombre) values(101, '2018-08-01', 'Jose Antonio');
+insert into cliente(sucursal, fecha, nombre) values(101, '2018-08-10', 'Andres Manuel');
+insert into cliente(sucursal, fecha, nombre) values(102, '2018-07-06', 'Ricardo');
+insert into cliente(sucursal, fecha, nombre) values(102, '2018-09-01', 'Octavio');
+insert into cliente(sucursal, fecha, nombre) values(101, '2018-08-30', 'Andres Manuel');
+
+//Consultas
+//a. La cantidad total de clientes que acudieron a una sucursal dada en una fecha específica.
+use supermercado;
+select count(*) from cliente where sucursal=101 and fecha='2018-08-01';
+//b. La cantidad total de clientes que acudieron a todas las sucursales en un día concreto.
+use supermercado;
+select count(*) from cliente where fecha='2018-08-01' allow filtering;
+//c. Los productos que adquirió un cliente dado en una fecha dada.
+use supermercado;
+select producto from compra where fecha='2018-08-01' and cliente='Jose Antonio' allow filtering;
+//d. El nombre de los clientes que acudieron a comprar el mes pasado.
+use supermercado;
+select nombre from cliente where fecha>'2018-08-17' and fecha<'2018-09-17' allow filtering;
+//e. La cantidad total de productos (tipos, no unidades) que se vendieron en un día concreto.
+use supermercado;
+select producto from compra where fecha='2018-08-30' allow filtering;
+//f. El nombre de los productos que se vendieron la semana pasada (día inicial: lunes).
+use supermercado;
+select producto from compra where fecha>'2018-09-10' and fecha<'2018-09-17' allow filtering;

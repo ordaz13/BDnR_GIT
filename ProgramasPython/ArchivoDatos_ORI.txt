@@ -1,0 +1,44 @@
+
+El análisis de datos, en la actualidad, juega un papel muy importante en la operación diaria 
+de la mayoría de las empresas, ya que puede conducir a tomar una buena o una mala 
+decisión impactando en la vida futura de la organización o en las acciones que se tomarán 
+con respecto a los temas en cuestión. Por esta razón, es necesario considerar que toda la 
+información generada por una empresa en sus procesos diarios es importante y de gran 
+valor para ésta, sin excepción, pues sin duda un correcto trato de los datos puede generar 
+conocimiento que será aplicado para tomar decisiones fundamentadas.
+
+Por lo anterior, la mayoría de las empresas desarrollan sistemas computacionales capaces 
+de soportar y almacenar los datos que son generados diariamente en la operación de sus 
+procesos y que ayudarán a realizar tareas de forma más ágil. Sin embargo, al iniciar el 
+desarrollo de dichos sistemas, algunas veces no se dimensiona el crecimiento que la 
+organización podría tener o sus requerimientos futuros, lo que lleva a crear sistemas poco 
+escalables y sin muchas oportunidades de cambio o mejora. Por esta razón es necesario 
+tener un panorama global sobre las necesidades de la empresa y del sector en el que se 
+desenvuelve, así como manejar modelos que permitan escalar soluciones y que sean de 
+fácil mantenimiento.
+
+Para desarrollar o mejorar sistemas computacionales orientados al almacenamiento de 
+datos es de suma importancia involucrar en su totalidad al negocio para el cual se 
+desarrolla el sistema, con la finalidad de conocer el funcionamiento de sus procesos y 
+poder hacer un dimensionamiento más acertado de sus necesidades. De igual forma, es 
+necesario mantener una buena comunicación con los usuarios finales del sistema, pues 
+serán ellos los que generen valor adicional para la empresa a través de la obtención de 
+datos y el análisis de los mismos, y para quienes la herramienta deberá ser amigable y de 
+fácil uso para evitar que sea abandonada y sustituida por procesos anteriores.
+
+Bajo este contexto, la Inteligencia de Negocios (BI, por sus siglas en inglés), atendiendo a 
+las actuales necesidades de las empresas, busca ayudarles con la organización inteligente 
+de datos históricos almacenándolos en un data warehouse o en data marts, según las 
+necesidades empresariales.
+
+El presente estudio busca proponer una solución de BI, enfocada a un sector particular de 
+la industria alimenticia (i.e., lácteos), que apoye el correcto almacenamiento de datos, 
+modificando y mejorando la estructura con la que se cuenta actualmente. Dicha solución 
+tendrá como principal objetivo agilizar y mejorar el proceso de toma de decisiones que 
+actualmente maneja la empresa. Para ello será necesario conocer el modelo de negocio 
+que maneja la empresa de lácteos a tratar, así como los procesos que forman parte de su 
+día a día.
+
+
+
+
