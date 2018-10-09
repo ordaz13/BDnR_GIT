@@ -49,10 +49,11 @@ for i in range(1,32):
     fechaRetiro.append(fecha)
     cantidad.append(coll.find({"Fecha_Retiro":fecha},{":id":0,"Bici":1}).count())
 plt.figure()
-plt.bar(fechaRetiro,cantidad)
+plt.plot(fechaRetiro,cantidad,'bo',fechaRetiro,cantidad,'b')
 plt.title("Cantidad de usuarios al día",size=15)
 plt.xlabel("Fecha")
 plt.xticks(rotation=90)
 plt.ylabel("Cantidad de usuarios")
+plt.grid(True)
 
 
