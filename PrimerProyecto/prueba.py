@@ -9,6 +9,7 @@ Created on Fri Oct  5 20:01:41 2018
 #import json
 #import sys
 import matplotlib.pyplot as plt
+#En la consola usar: %matplotlib auto para graficar en ventana nueva.
 
 #Hace conexion
 from pymongo import MongoClient as Connection
@@ -29,7 +30,7 @@ for doc in coll.find({},{"_id":0,"Edad_Usuario":1}):
     arrEdad.append(edad)
 #print(arrEdad)
 plt.figure()
-plt.hist(arrEdad,bins=7,range=(18,80))
+plt.hist(arrEdad,bins=10,range=(18,80))
 plt.title("Histograma de edades",size=15)
 plt.xlabel("Edad en años")
 plt.ylabel("Cantidad de personas")
