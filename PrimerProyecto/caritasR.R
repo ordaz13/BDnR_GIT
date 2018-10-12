@@ -9,6 +9,6 @@ plotdat[,1]<-datos$Distancia
 plotdat[,11]<-datos$Horas
 plotdat[,9]<-datos$Genero
 plotdat[,6]<-datos$Edad
-plotdat[,7]<-datos$Viajes
+plotdat[,8]<-datos$Viajes
 
 faces(plotdat,face.type=1,scale = TRUE,cex=0.85,print.info = TRUE, labels = datos$Colonia)
