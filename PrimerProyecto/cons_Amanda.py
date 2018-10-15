@@ -34,7 +34,7 @@ edad = {} #Edad promedio de los usuarios
 genero = {} #Género "promedio" de los usuarios
 viajes = {} #Cantidad promedio de viajes al día
 distancia = {} #Longitud promedio de recorridos al día
-hora = {} #Hora pico promedio 
+hora = {} #Hora pico
 
 #Hace el mapeo de todas las cicloestaciones a su código postal correspondiente
 for doc in collEst.find({},{"_id":0,"id":1, "zip":1}):
@@ -88,7 +88,11 @@ for codigo in cp:
         genero[codigo] = g
         viajes[codigo] = v
         distancia[codigo] = d
-        hora[codigo] = max(horas.values())/v
+        aux = max(horas.values())
+        for clave in horas:
+            if horas[clave] == aux:
+                hora[codigo] = clave
+                break
         
 #Manda valores de las consultas a un archivo csv para usarlo en R
 i = 1
