@@ -1,4 +1,5 @@
-#install.packages("aplpack")
+install.packages("aplpack")
+library(aplpack)
 datos <- read.csv('datos.csv')
 
 plotdat <- matrix(1,nrow=31,ncol=15) # all constant
